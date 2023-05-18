@@ -1,78 +1,200 @@
 .section_content {
-    height: 93vh;
-    background-color: #FCF8FF;
+  height: 93vh;
+  background-color: #fcf8ff;
+  align-items: center;
 }
-.container_table{
-    max-width: 1330px;
-    margin: 0 auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    padding: 15px 25px;
+.container_table {
+  width: 95%;
+  max-height: 345px;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: start;
+
+  border: 1px solid #b0a8b9;
+  overflow-y: auto;
 }
 
-.table-first-column {
-    background-color: #fff;
-    position: absolute;
-    z-index: 1000;
-    width: 310px;
-    top: 0;
-    left: 0;
+.table-main {
+  border-spacing: 0;
+  border: 1px solid black;
+}
+.table-main td,
+.table-main th {
+  margin: 0;
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+.table-main td {
+  padding: 0.5rem;
+}
+.table-main td:last-child,
+.table-main th:last-child {
+  border-right: 0;
+}
+
+.text-label-filter {
+  font-size: 1em;
+  text-transform: uppercase;
+  font-family: "Ek Mukta";
+  font-weight: 600;
+  color: #40ae49;
+  padding: 0 9px;
+}
+.content-top-filter {
+  width: 95%;
+  margin-top: 15px;
+  border: 1px solid #000;
+  border-bottom: 0;
+}
+/* .table-first-column {
+  background-color: #fff;
+  position: absolute;
+  z-index: 1000;
+  width: 70px;
+  top: 0;
+  left: 0;
+  border-right: 1px solid #f2f2f2;
+}
+.table-general-column {
+  background-color: #fff;
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  top: 0;
+  left: 70px;
+  overflow: auto;
 }
 
 .tbl-1 {
-    background-color: transparent;
-    width: 100%;
-    border-collapse: collapse;
+  background-color: transparent;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
 }
 
 .tbl-1 th {
-    width: 100%;
-    padding-left: 40px;
+  width: 100%;
+  padding-left: 15px;
 }
 
 .wrap-table tr {
-    border-bottom: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  height: 40px;
+  white-space: nowrap;
+  vertical-align: top;
 }
 
 .wrap-table th {
-    font-family: Roboto-Bold;
-    font-size: 14px;
-    color: #333;
-    line-height: 1.4;
-    text-transform: uppercase;
-    padding-top: 21px;
-    padding-bottom: 21px;
+  font-family: Roboto-Bold;
+  font-size: 14px;
+  color: #333;
+  line-height: 1.4;
+  height: 61px;
+   text-transform: uppercase;
+  padding-top: 21px;
+  padding-bottom: 21px;
+  white-space: nowrap;
+vertical-align: top;
 }
 
-.table-first-column td {
-    color: #666;
-    font-family: Roboto-Medium;
-    font-size: 15px;
-    line-height: 1.4;
-    padding-top: 8px;
-    padding-bottom: 8px;
+.table-first-column td,
+.table-general-column td {
+  color: #666;
+  font-family: Roboto-Medium;
+  font-size: 15px;
+  line-height: 40px;
 }
 
 .b-blank {
-    background-color: #fff;
+  background-color: #fff;
 }
-.column1{
-    width: 100%;
-    padding-left: 40px;
+.column1 {
+  width: 100%;
+  padding-left: 15px;
 }
 
 th,
 td {
-    font-weight: unset;
-    padding-right: 10px;
+  font-weight: unset;
+  padding-right: 10px;
+  white-space: nowrap;
+vertical-align: top;
+border: 1px solid #f2f2f2;
 }
 
 th {
-    text-align: left;
+  text-align: left;
 }
+.table-scroll {
+  position: relative;
+  max-width: 100%;
+  overflow: hidden;
+} */
+/* CheckBox */
+/* .check {
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  width: 18px;
+  height: 18px;
+  z-index: 0;
+  -webkit-tap-highlight-color: transparent;
+  transform: translate3d(0, 0, 0);
+}
+.check:before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(34, 50, 84, 0.03);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.check svg {
+  position: relative;
+
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #c8ccd4;
+  stroke-width: 1.5;
+  transform: translate3d(0, 0, 0);
+  transition: all 0.2s ease;
+}
+.check svg path {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 0;
+}
+.check svg polyline {
+  stroke-dasharray: 22;
+  stroke-dashoffset: 66;
+}
+
+.cbx:checked + .check svg {
+  stroke: #4285f4;
+}
+.cbx:checked + .check svg path {
+  stroke-dashoffset: 60;
+  transition: all 0.3s linear;
+}
+.cbx:checked + .check svg polyline {
+  stroke-dashoffset: 42;
+  transition: all 0.2s linear;
+  transition-delay: 0.15s;
+}
+.check:hover:before {
+  opacity: 1;
+}
+.check:hover svg {
+  stroke: #4285f4;
+}
+ */
