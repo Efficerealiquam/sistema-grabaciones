@@ -425,38 +425,38 @@ export const metaDataGab = [
 export const metaColums = [
   {
     Header: "Emisora",
-    accessor: "Estación",
+    accessor: "estacion",
   },
   {
     Header: "Ciudad",
-    accessor: "Nombre del canal",
+    accessor: "nombre_canal",
   },
   {
     Header: "Advertiser",
-    accessor: "Advertiser",
+    accessor: "advertiser",
   },
   {
     Header: "Orden",
-    accessor: "Orden",
+    accessor: "orden",
   },
   {
     Header: "Fecha",
-    accessor: "Fecha de emisión",
+    accessor: "fecha_emision",
   },
   {
     Header: "Hora",
-    accessor: "Hora",
+    accessor: "hora",
   },
   {
     Header: "Grabacion",
-    accessor: "Audio",
+    accessor: "audio",
   },
 ];
 
 export const dataAdvertisers = [
-  { Advertiser: "UNILEVER ANDINA PERU S.A." },
-  { Advertiser: "LIMBA SERVICES S.A.C." },
-  { Advertiser: "PROGRAMA DE LAS NACIONES UNIDAS PARA EL DESARROLLO" },
-  { Advertiser: "UNIVERSIDAD TECNOLOGICA DEL PERU S.A.C." },
-  { Advertiser: "UNIVERSIDAD PRIVADA ANTENOR ORREGO" },
+  { value: "UNILEVER ANDINA PERU S.A.", label: "UNILEVER ANDINA PERU S.A." },
+  { value: "LIMBA SERVICES S.A.C.", label: "LIMBA SERVICES S.A.C." },
+  { value: "PROGRAMA DE LAS NACIONES UNIDAS PARA EL DESARROLLO", label: "PROGRAMA DE LAS NACIONES UNIDAS PARA EL DESARROLLO" },
+  { value: "UNIVERSIDAD TECNOLOGICA DEL PERU S.A.C.", label: "UNIVERSIDAD TECNOLOGICA DEL PERU S.A.C" },
+  { value: "UNIVERSIDAD PRIVADA ANTENOR ORREGO", label: "UNIVERSIDAD PRIVADA ANTENOR ORREGO" },
 ];

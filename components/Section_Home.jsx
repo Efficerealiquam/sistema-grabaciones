@@ -1,131 +1,167 @@
 "use client";
 
 import "@styles/Section_home.css";
-import { metaDataGab, metaColums, dataAdvertisers } from "@util/datPrueba";
+import { metaDataGab, metaColums } from "@util/datPrueba";
 import { useMemo, useState, useRef, forwardRef, useEffect } from "react";
 import { useRowSelect, useTable } from "react-table";
 import SelectBox from "./SelectBox";
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css';
+import TableIni from "./Table_ini";
 
-const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
-  const defaultRef = useRef();
-  const resolvedRef = ref || defaultRef;
+const Section_Home = () => {
+  /* Variables */
+  /* States */
+  const [dataClients, setDataClients] = useState()
+  const [dataOrdenByClient, setDataOrdenByClient] = useState([])
+  const [disableSelect, setDisableSelect] = useState(true)
+  const [dataTable, setDataTable] = useState([])
+  const [initialValues, setInitialValues] = useState({
+    clients: [],
+    orden: [],
+    fechIni: "",
+    fechEnd: ""
+  })
+  /* End States */
+
+  /* TODO:Consulta GET de los clientes para el SeelectBox cliente */
+  useEffect(() => {
+    const fetchClientes = async () => {
+      const response = await fetch("http://localhost:3001/cliente?limit=20");
+      const { data } = await response.json();
+      const transformData = data.map(obj => ({
+        value: obj.c_advertiser,
+        label: obj.c_advertiser,
+        ruc: obj.c_ruc
+      }));
+      setDataClients(transformData);
+    };
+    fetchClientes();
+
+  }, [])
+
+  /* End  */
+
+
+/* TODO:Hidratacion de la tabla y configuracion  */
+  //Hidratacion inicial 
 
   useEffect(() => {
-    resolvedRef.current.indeterminate = indeterminate;
-  }, [resolvedRef, indeterminate]);
+    const fetchDataTableInitial = async () => {
+      const response = await fetch("http://localhost:3001/data-horarios-emision?limit=50");
+      const { data } = await response.json();
+      if (data) setDataTable(data)
 
-  return (
-    <>
-      <input type="checkbox" ref={resolvedRef} {...rest} />
-    </>
-  );
-});
-const Section_Home = () => {
-  const data = useMemo(() => metaDataGab, []);
-  const columns = useMemo(() => metaColums, []);
-  const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {
-    hooks.visibleColumns.push((columns) => [
-      {
-        id: "selection",
-        Header: ({ getToggleAllRowsSelectedProps }) => (
-          <div>
-            <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
-          </div>
-        ),
-        Cell: ({ row }) => (
-          <div>
-            <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
-          </div>
-        ),
-      },
-      ...columns,
-    ]);
-  });
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state: { selectedRowIds },
-  } = tableInstance;
+    };
+    fetchDataTableInitial();
 
+  }, [])
+
+  const fecthDataTableFilter = async () => {
+    let link = `http://localhost:3001/data-horarios-emision?limit=50`
+
+    if (initialValues.clients.length === 1) {
+      link = link +`&ruc=${initialValues.clients[0]}`;
+    }
+    if (condition) {
+      
+    }
+    console.log(link)
+
+  }
+
+  const dataT =  dataTable || []; //Data de la tabla
+  const columns = useMemo(() => metaColums, []); //Cabezera de la Tabla
+ /* End */
+
+
+
+  /*TODO: Metodo para selecionnar toda la data de las filas seleccionadas con el checkBox */
   const handleGetSelectedData = () => {
-    const selectedData = rows
+   /*  const selectedData = rows
       .filter((row) => selectedRowIds[row.id])
       .map((row) => row.original);
-    console.log(selectedData);
+    console.log(selectedData); */
   };
+  /* End-sec */
 
+
+  /* TODO:Consulta de los ordenes , cuando un cliente es seleccionado se hidrata el selectBox, cuando se selecciona mas de 1 se limpia todo las ordenes 
+  seleccionadas y se limpia el selecBox */
+  useEffect(() => {
+    if (initialValues.clients.length === 1) {
+      const fetchOrdenByClient = async () => {
+        const response = await fetch(`http://localhost:3001/cliente-orden/${initialValues.clients[0]}`);
+        const { data } = await response.json();
+        const transformData = data.map(obj => ({
+          value: obj.c_orden,
+          label: obj.c_orden,
+          ruc: obj.c_ruc
+        }));
+        setDataOrdenByClient(transformData);
+      };
+      fetchOrdenByClient();
+      setDisableSelect(false);
+    }
+    else if (initialValues.clients.length > 1 || initialValues.clients.length === 0) {
+      setDataOrdenByClient([])
+      setDisableSelect(true)
+      setInitialValues({ ...initialValues, orden: [] })
+    }
+
+  }, [initialValues.clients.length])
+  /* End */
+
+
+  //console.log(initialValues.clients[0])
   return (
     <div className="section_content relative flex flex-col w-full ">
       <div className="content-top-filter" >
-        <form className="relative w-full background-blank p-2 border-radius-5px flex justify-start items-center z-10">
+        <form className="relative w-full background-blank p-2 border-radius-5px flex justify-between items-center z-10">
           <div className="relative flex justify-start items-center ">
-            <span className="text-label-filter">Advertiser: </span>
+            <span className="text-label-filter">Cliente: </span>
             <div
               className="relative"
               style={{ height: "42px", width: "250px" }}
             >
-              <SelectBox data={dataAdvertisers} />
+              <SelectBox data={dataClients} setValues={setInitialValues} values={initialValues} type={1} />
             </div>
           </div>
+          <div className=" relative flex justify-start items-center ">
+            <span className="text-label-filter">Orden: </span>
+            <div
+              className="relative"
+              style={{ height: "42px", width: "250px" }}
+            >
+              <SelectBox data={dataOrdenByClient} setValues={setInitialValues} values={initialValues} type={2} disable={disableSelect} />
+            </div>
+          </div>
+          <div className=" relative flex justify-start items-center ">
+            <span className="text-label-filter" >
+              Fecha Inicial:
+            </span>
+            <DatePicker dateFormat="dd/MM/yyyy" selected={initialValues.fechIni === "" ? new Date() : initialValues.fechIni } onChange={(date) => setInitialValues({ ...initialValues, fechIni: date })} />
+          </div>
+          <div className=" relative flex justify-start items-center ">
+            <span className="text-label-filter" >
+              Fecha Final:
+            </span>
+            <DatePicker dateFormat="dd/MM/yyyy" selected={initialValues.fechEnd  === "" ? new Date() : initialValues.fechIni} onChange={(date) => setInitialValues({ ...initialValues, fechEnd: date })} />
+          </div>
+          <button
+            type="button"
+            className="btn-search"
+            onClick={fecthDataTableFilter}
+            disabled={initialValues.clients.length || initialValues.orden.length || initialValues.fechIni || initialValues.fechEnd ? false : true}
+          >
+            Buscar
+          </button>
         </form>
       </div>
       <section className="w-full relative wrap-table b-blank container_table">
-        <table
-          className="table-main w-full"
-          {...getTableProps()}
-          style={{
-            minWidth: "100%",
-            borderCollapse: "collapse",
-            border: "1px solid black",
-          }}
-        >
-          <thead>
-            {headerGroups.map((headerGroups, i) => (
-              <tr key={i} {...headerGroups.getHeaderGroupProps()}>
-                {headerGroups.headers.map((column, j) => (
-                  <th
-                    key={j}
-                    {...column.getHeaderProps()}
-                    style={{
-                      position: "sticky",
-                      top: 0,
-                      zIndex: 1,
-                    }}
-                  >
-                    <div
-                      style={{
-                        background: "#fcf8ff",
-                        padding: "0.5rem",
-                        borderBottom: "1px inset #000",
-                      }}
-                    >
-                      {column.render("Header")}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()}>
-            {rows.map((row, i) => {
-              prepareRow(row);
-              return (
-                <tr key={i} {...row.getRowProps()}>
-                  {row.cells.map((cell, j) => {
-                    return (
-                      <td key={j} {...cell.getCellProps()}>
-                        {cell.render("Cell")}
-                      </td>
-                    );
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        {dataTable.length === 0 ?
+          "Loading..." :
+          <TableIni data={dataT} columns={columns} />}
         <button onClick={handleGetSelectedData}>
           Obtener Datos seleccionados
         </button>
