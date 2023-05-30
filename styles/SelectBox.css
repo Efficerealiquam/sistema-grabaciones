@@ -18,6 +18,10 @@
     height: 38px !important;
     overflow: auto;
   }
+  .custom-select-mult.Nofocused  .css-13cymwt-control::-webkit-scrollbar{
+    width: 1px;
+  }
+  
   .custom-select-mult.Nofocused  .css-13cymwt-control .css-3w2yfm-ValueContainer{
     padding-top: 4px;
 
@@ -39,3 +43,15 @@
   #react-select-3-listbox div div:last-child{
     border: none;
   }
+
+  .css-1n6sfyn-MenuList::-webkit-scrollbar{
+    width: 10px;
+  }
+
+  .css-1n6sfyn-MenuList::-webkit-scrollbar-thumb{
+   background-color:#B0A8B9 ;
+   background-clip: content-box;
+   border-radius: 8px;
+   border: 3px solid transparent;
+  }
+

@@ -1,8 +1,21 @@
-.nav_content{
-    height: 7vh;
+.nav_content {
+    height: 8.3vh;
     width: 100%;
     line-height: 7vh;
-    font-size: 1.2em;
+    font-size: 1.5em;
+    display: flex;
     text-align: center;
     border-bottom: 1px solid #B0A8B9;
+    color: #40ae49;
+    font-weight: bold;
+}
+
+.logo_crp {
+    width: 75px;
+    height: 59px;
+    margin-left: 130px;
+}
+
+.nav_content span {
+    margin-left: 400px;
 }

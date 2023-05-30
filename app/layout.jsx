@@ -2,7 +2,7 @@ import "@styles/globals.css";
 
 export const metadata = {
   title: "Projecto Grabaciones CRP",
-  description: "Un proyecto para descargar grabaciones con filtros",
+  description: "Un proyecto para descargar Grabaciones con filtros",
 };
 
 const RootLayout = ({ children }) => {

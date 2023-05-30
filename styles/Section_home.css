@@ -1,11 +1,17 @@
-.section_content {
-  height: 93vh;
-  background-color: #fcf8ff;
-  align-items: center;
+:root{
+  --bg:#2f323f;
 }
+
+.section_content {
+  height: 100%;
+  align-items: center;
+  padding-left: 100px;
+  /* #2f323f */
+}
+
 .container_table {
   width: 95%;
-  max-height: 345px;
+  max-height: 71vh;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -14,28 +20,41 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: start;
-  border: 1px solid #28a745;
+  border: 1px solid #2f323f;
   border-top: 0;
   overflow-y: auto;
 }
 
+.container_table::-webkit-scrollbar {
+  width: 5px;
+}
+
+.container_table::-webkit-scrollbar-thumb {
+  background: #40ae49;
+}
+
 .table-main {
   border-spacing: 0;
- /*  border: 1px solid #B0A8B9; */
+  /*  border: 1px solid #B0A8B9; */
 }
+
 .table-main td,
 .table-main th {
   margin: 0;
   border-bottom: 1px solid #B0A8B9;
   border-right: 1px solid #B0A8B9;
 }
+/* 2f323f */
 .table-main th {
   border-top: 1px solid #B0A8B9;
 }
+
 .table-main td {
   padding: 0.5rem;
   font-size: 0.7em;
+  font-weight: 500;
 }
+
 .table-main td:last-child,
 .table-main th:last-child {
   border-right: 0;
@@ -48,39 +67,54 @@
   color: #40ae49;
   padding: 0 9px;
 }
+
 .content-top-filter {
   width: 95%;
-  margin-top: 15px;
-  border: 1px solid #28a745;
   border-bottom: 0;
 }
-.react-datepicker-wrapper{
+
+.react-datepicker-wrapper {
   width: fit-content !important;
   border: 1px solid #E5E7EB !important;
-  border-radius: 0.375rem !important;
+  border-radius: 0.375rem ;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
-.react-datepicker__input-container input{
+
+.react-datepicker__input-container {
+  width: 120px !important;
+}
+
+.react-datepicker__input-container input {
   width: fit-content;
   padding-left: 14px;
   height: 40px;
+  width: 120px;
+  border-radius: 0.375rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
 
-}
-.react-datepicker__input-container input:focus{
-  border-radius: 0.375rem ;
-  border: 1px solid #2684ff ;
-  box-shadow: 0px 0px 0px 1px #2684ff ;
+.react-datepicker__input-container input:focus {
+  border-radius: 0.375rem;
+  border: 1px solid #2684ff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  box-shadow: 0px 0px 0px 1px #2684ff;
   outline: none;
 }
-.focus_input:focus{
-  border-radius: 0.375rem ;
-  border: 1px solid #2684ff ;
-  box-shadow: 0px 0px 0px 1px #2684ff ;
+
+.focus_input:focus {
+  border-radius: 0.375rem;
+  border: 1px solid #2684ff;
+  box-shadow: 0px 0px 0px 1px #2684ff;
   outline: none;
 }
-.btn-search{
+
+.btn-search {
   position: relative;
-  width: 96px;
-  height: 31px;
+  min-width: 120px;
+  height: 40px;
   margin-left: 10px;
   text-transform: uppercase;
   letter-spacing: 0.01em;
@@ -89,15 +123,181 @@
   border-spacing: 0;
   border-collapse: separate;
   vertical-align: middle;
-  color: white;
-  background-color: #35b86b;
-  border-radius: 2px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  color: var(--clrb);
+  background-color: #B0A8B9;
+ /*  border-radius: 4px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
   font: 14px "Roboto Medium", Helvetica, "Droid Sans", Tahoma, Geneva, sans-serif;
   transition-property: box-shadow, background-color;
   text-align: center;
   white-space: nowrap;
+  transition: 0.5s;
 }
-.btn-search:hover{
-  background-color: rgba(53, 184, 107,0.8);
+
+.btn-search:hover {
+  color: var(--clrb);
+  background-color: var(--clrb);
+  letter-spacing: 0.1em;
 }
+.btn-search::before{
+  content: "";
+  position: absolute;
+  inset: 3px;
+  background-color: var(--bg);
+}
+.btn-search:hover:before{
+  background: #fff;
+}
+.btn-search span{
+  position: relative;
+  z-index: 1;
+}
+.btn-search i{
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+.btn-search i::before{
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  background: var(--bg);
+  border: 2px solid var(--clrb);
+  top: -3.5px;
+  left: 80%;
+  transition: 0.2s,  box-shadow 0.2s;
+  transition-delay: 0.2s , 0s;
+}
+
+.btn-search:hover i::before{
+  width: 8px;
+  left: calc(50% - 3px);
+  box-shadow: 
+   40px 0 var(--bg) ,
+  -40px 0 var(--clrb), 
+  -40px 0 0 4px #fff,
+   8px -7px var(--clrb),
+   -8px -7px var(--bg);
+   transition-delay: 0s,0.2s;
+}
+
+.btn-search i::after{
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 8px;
+  background: var(--bg);
+  border: 2px solid var(--clrb);
+  bottom: -2.8px;
+  left: 20%;
+  transition: 0.2s,  box-shadow 0.2s;
+  transition-delay: 0.2s , 0s;
+}
+
+.btn-search:hover i::after{
+  width: 8px;
+  left: calc(50% - 3px);
+  box-shadow: 
+  -40px 0 var(--bg) ,
+   40px 0 var(--clrb), 
+   40px 0 0 4px #fff,
+   68px -20px var(--clrb),
+   -70px -20px var(--bg);
+   transition-delay: 0s,0.2s;
+}
+
+.content-nav-page {
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid #000;
+  border-top: 0;
+  margin-top: 0;
+}
+
+.cont-right-page {
+  display: flex;
+  padding: 10px 0;
+}
+
+.cont-right-page .css-13cymwt-control {
+  min-height: 25px !important;
+  font-size: 0.9em;
+}
+
+.cont-right-page .css-1n6sfyn-MenuList {
+  font-size: 0.7em !important;
+}
+
+#react-select-4-listbox {
+  z-index: 999;
+
+}
+
+.cont-left-page {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  color: #40ae49;
+}
+
+.cont-left-page span {
+  margin-left: 30px;
+}
+
+.btn-page:disabled{
+  background-color: rgba(47, 50, 63, 0.7);
+}
+
+.label-filter {
+  color: rgba(0, 0, 0, 0.6);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+  line-height: 1.4375em;
+  letter-spacing: 0.00938em;
+}
+
+.icon-filter-cust {
+  position: relative;
+  width: 42px;
+  height: 41.6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #E5E7EB;
+  border-right: 0;
+  background: #ffff;
+  border-top-left-radius: 0.375rem;
+  border-bottom-left-radius: 0.375rem;
+}
+.fade-icon-e{
+  animation: fade 1s infinite; 
+}
+
+@keyframes fade {
+  0% {
+    opacity: 1; /* Valor inicial de opacidad */
+  }
+  50% {
+    opacity: 0.5; /* Valor de opacidad a la mitad de la animación */
+  }
+  100% {
+    opacity: 1; /* Valor de opacidad al final de la animación */
+  }
+}
+/* 
+input[type="checkbox"] {
+  color: #000000 !important;
+}
+
+input[type="checkbox"]:checked {
+  color: #ff0000 !important;
+}
+input[type="checkbox"]::before {
+  background-color: #dddddd !important;
+}
+input[type="checkbox"]:checked::before {
+  background-color: #00ff00 !important;
+} */

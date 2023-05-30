@@ -1,26 +1,27 @@
 import React, { forwardRef, useEffect, useRef } from 'react'
-import {useRowSelect, useTable} from 'react-table'
+import { useRowSelect, useTable } from 'react-table'
+import LoaderT from './LoaderT';
 
 
 /* TODO:Logica para crear una fila de checkBox que permita seleccionar al usuario */
 const IndeterminateCheckbox = forwardRef(({ indeterminate, ...rest }, ref) => {
     const defaultRef = useRef();
     const resolvedRef = ref || defaultRef;
-  
+
     useEffect(() => {
-      resolvedRef.current.indeterminate = indeterminate;
+        resolvedRef.current.indeterminate = indeterminate;
     }, [resolvedRef, indeterminate]);
-  
+
     return (
-      <>
-        <input type="checkbox" ref={resolvedRef} {...rest} />
-      </>
+        <>
+            <input type="checkbox" ref={resolvedRef} {...rest} />
+        </>
     );
-  });
-  /* End */
+});
+/* End */
 
 
-const Table_ini = ({ columns, data }) => {
+const Table_ini = ({ columns, data, loading }) => {
     const { getTableProps,
         getTableBodyProps,
         headerGroups,
@@ -31,12 +32,12 @@ const Table_ini = ({ columns, data }) => {
                 {
                     id: "selection",
                     Header: ({ getToggleAllRowsSelectedProps }) => (
-                        <div>
+                        <div key="header" >
                             <IndeterminateCheckbox {...getToggleAllRowsSelectedProps()} />
                         </div>
                     ),
                     Cell: ({ row }) => (
-                        <div>
+                        <div key={row.index} className='flex justify-center' >
                             <IndeterminateCheckbox {...row.getToggleRowSelectedProps()} />
                         </div>
                     ),
@@ -45,13 +46,13 @@ const Table_ini = ({ columns, data }) => {
             ]);
         });
 
-    
-  /*   const handleGetSelectedData = () => {
-        const selectedData = rows
-            .filter((row) => selectedRowIds[row.id])
-            .map((row) => row.original);
-        console.log(selectedData);
-    }; */
+
+    /*   const handleGetSelectedData = () => {
+          const selectedData = rows
+              .filter((row) => selectedRowIds[row.id])
+              .map((row) => row.original);
+          console.log(selectedData);
+      }; */
     return (
         <table
             className="table-main w-full"
@@ -64,9 +65,9 @@ const Table_ini = ({ columns, data }) => {
             <thead>
                 {headerGroups.map((headerGroups, i) => (
                     <tr key={i} {...headerGroups.getHeaderGroupProps()}>
-                        {headerGroups.headers.map((column, j) => (
+                        {headerGroups.headers.map((column,i) => (
                             <th
-                                key={j}
+                                key={i}
                                 {...column.getHeaderProps()}
                                 style={{
                                     position: "sticky",
@@ -76,7 +77,8 @@ const Table_ini = ({ columns, data }) => {
                             >
                                 <div
                                     style={{
-                                        background: "#fcf8ff",
+                                        background: "#2f323f",
+                                        color:"#40ae49",
                                         padding: "0.5rem",
                                         borderBottom: "1px inset #B0A8B9",
                                         borderTop: "1px inset #B0A8B9",
@@ -89,7 +91,7 @@ const Table_ini = ({ columns, data }) => {
                     </tr>
                 ))}
             </thead>
-            <tbody {...getTableBodyProps()}>
+            {loading ? <LoaderT/> : <tbody {...getTableBodyProps()}>
                 {rows.map((row, i) => {
                     prepareRow(row);
                     return (
@@ -105,6 +107,9 @@ const Table_ini = ({ columns, data }) => {
                     );
                 })}
             </tbody>
+
+            }
+
         </table>
     )
 }

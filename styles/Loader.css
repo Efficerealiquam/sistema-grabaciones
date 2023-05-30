@@ -1,0 +1,156 @@
+.cont_loader{
+    position: relative;
+    height: 73vh;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   /*  background-color: rgba(0, 0, 0, 0.5); */
+}
+.cont_lod_opt{
+    position: absolute;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.reflect_loader{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-box-reflect: below 1px linear-gradient(transparent,#0002);
+    width: 100%;
+    margin-bottom: 17vh;
+}
+
+.loader{
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+}
+
+.loader::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #40ae49;
+    animation: blinkCursor 0.8s steps(3) infinite;
+}
+
+@keyframes blinkCursor {
+    0%,75%
+    {
+        opacity: 1;
+    }
+    76%,100%
+    {
+        opacity: 0;
+    }
+}
+
+.loader h2{
+    position: relative;
+    color: #40ae49;
+    letter-spacing: 5px;
+    font-size: 2em;
+    text-transform: uppercase;
+    animation: typing 8s steps(10) infinite;
+    overflow: hidden;
+}
+
+@keyframes typing {
+    0%,90%,100%
+    {
+        width: 0;
+    }
+    30%,60%
+    {
+        width: 248.05px;
+    }
+}
+
+.cont_loader .loader_2 {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 20px solid transparent;
+    border-bottom: 20px solid #40ae49;
+    border-right: 20px solid #40ae49;
+    transform: rotate(45deg);
+    animation: aniLoad_1 4s ease-in-out infinite;
+}
+
+@keyframes aniLoad_1 {
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    50%
+    {
+        transform: rotate(90deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+    
+}
+
+.cont_loader .loader_2 .ball {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;animation: aniLoad_2 4s ease-in-out infinite;
+}
+
+@keyframes aniLoad_2 {
+    0%
+    {
+        transform: rotate(0deg);
+    }
+    50%
+    {
+        transform: rotate(180deg);
+    }
+    100%
+    {
+        transform: rotate(0deg);
+    }
+    
+}
+.cont_loader .loader_2 .ball::before {
+    content: "";
+    position: absolute;
+    bottom: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.cont_loader.l2{
+    position: relative;
+    height: 65vh;
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+}
+.cont_lod_opt.l2{
+    position: absolute;
+    display: flex;
+    width: 1357px;
+    height: 100%;
+    left: 0%;
+    background-color:transparent;
+}

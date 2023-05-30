@@ -1,3 +1,4 @@
+import { MdOutlinePlayDisabled } from 'react-icons/md'
 export const metaDataGab = [
   {
     _id: "645b0102cd12d69f18425158",
@@ -432,7 +433,7 @@ export const metaColums = [
     accessor: "nombre_canal",
   },
   {
-    Header: "Advertiser",
+    Header: "Cliente",
     accessor: "advertiser",
   },
   {
@@ -448,8 +449,23 @@ export const metaColums = [
     accessor: "hora",
   },
   {
-    Header: "Grabacion",
+    Header: "Referencia",
+    accessor: "referencia_audio",
+  },
+  {
+    Header: "Grabación",
     accessor: "audio",
+    Cell: ({ value }) => {
+      if (value === "not_found") {
+        return <MdOutlinePlayDisabled />
+      } else {
+        return <audio controls  >
+                  <source 
+                  src="\\srvlimfs1.crp.local\DATA\211\Grabaciones Provincia\Chiclayo\2023-03-29\CHY-RIT202303290930.mp3"
+                  type="audio/mpeg" />
+                </audio>
+      }
+    }
   },
 ];
 
